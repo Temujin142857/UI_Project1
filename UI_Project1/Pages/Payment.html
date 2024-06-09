@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../Styles/PaymentStyles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title></title>
+</head>
+<body>
+<div class="container">
+    <h1>Parameters Received</h1>
+    <p id="RoomName"></p>
+    <p id="RoomDescription"></p>
+    <p id="GameMaster"></p>
+</div>
+
+
+<script>
+
+        function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        const value1 = params.get('value1');
+        const value2 = params.get('value2');
+        return { value1, value2 };
+    }
+
+        const values = getQueryParams();
+        document.getElementById('values').innerText = `Value1: ${values.value1}, Value2: ${values.value2}`;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const { param1, param2, param3 } = getQueryParams();
+        document.getElementById('param1').textContent = `Parameter 1: ${param1}`;
+        document.getElementById('param2').textContent = `Parameter 2: ${param2}`;
+        document.getElementById('param3').textContent = `Parameter 3: ${param3}`;
+    });
+</script>
+
+</body>

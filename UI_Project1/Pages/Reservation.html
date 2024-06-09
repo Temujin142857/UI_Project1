@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../Styles/ReservationStyles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+<div style="margin:20px">
+    <div class="calendar-container">
+        <div id="calendar" class="calendar">
+            <div class="calendar-header">
+                <button onclick="prevMonth()">&lt;</button>
+                <span id="monthYear"></span>
+                <button onclick="nextMonth()">&gt;</button>
+            </div>
+            <div class="calendar-body">
+                <div class="days">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+                    <div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div id="dates" class="dates"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <div style="margin-right: auto; margin-left: auto; ">
+        <div style="display: flex; justify-content: center;">
+            <div class="time-container" style="padding: 5px 0; border-radius: 10px; background-color: #f7f6f2;">
+                <label for="timeInput" style="background-color: #f7f6f2; padding: 5px">Choisi un Temp: </label>
+                <input type="time" id="timeInput" style="background-color: #f7f6f2; padding: 5px; border: none">
+            </div>
+            <div>
+                <button class="btn custom-button">Reserve</button>
+            </div>
+        </div>
+        <div style="background-color: #b59a73; padding: 10px">
+            <h1 id="RoomName"></h1>
+            <p id="RoomDescription"></p>
+            <h1 id="GameMasterName"></h1>
+            <p id="GameMasterDescription"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedDate = null;
+    let today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+
+    const monthYear = document.getElementById('monthYear');
+    const dates = document.getElementById('dates');
+    const dateInput = document.getElementById('dateInput');
+    let room;
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Your code here
+        loadCalendar(currentMonth, currentYear);
+        const params = new URLSearchParams(window.location.search);
+        room = params.get('room');
+        document.getElementById('RoomName').innerText = `Salle: ${room}`;
+        document.getElementById('RoomDescription').innerText = `${roomDescriptions.get(room)}`;
+        document.getElementById('GameMasterName').innerText = `Maître du Jeu: ${gameMasterNames.get(room)}`;
+        document.getElementById('GameMasterDescription').innerText = `${gameMasterDescriptions.get(room)}`;
+    });
+
+    function loadCalendar(month, year) {
+        dates.innerHTML = '';
+        monthYear.textContent = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+
+        const firstDay = new Date(year, month).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let i = 0; i < firstDay; i++) {
+            dates.innerHTML += '<div></div>';
+        }
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const dateDiv = document.createElement('div');
+            dateDiv.textContent = i;
+            dateDiv.onclick = function() {
+                selectDate(i, month, year);
+            };
+            if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                dateDiv.classList.add('today');
+            }
+            dates.appendChild(dateDiv);
+        }
+    }
+
+    function selectDate(day, month, year) {
+        selectedDate = new Date(year, month, day);
+        dateInput.value = selectedDate.toDateString();
+    }
+
+    function prevMonth() {
+        if (currentMonth === 0) {
+            currentMonth = 11;
+            currentYear -= 1;
+        } else {
+            currentMonth -= 1;
+        }
+        loadCalendar(currentMonth, currentYear);
+    }
+
+    function nextMonth() {
+        if (currentMonth === 11) {
+            currentMonth = 0;
+            currentYear += 1;
+        } else {
+            currentMonth += 1;
+        }
+        loadCalendar(currentMonth, currentYear);
+    }
+
+
+
+    const roomDescriptions=new Map([
+        ["Salle de la Porte Rouge","Ressentez le frisson de l'inconnu en entrant dans la Salle de la Porte Rouge. Derrière cette barrière cramoisie se cache un labyrinthe d'énigmes mystérieuses qui mettront à l'épreuve votre esprit et votre courage. Cette salle peut accueillir de 2 à 6 personnes, idéale pour une expérience intime ou une aventure en petit groupe. Le prix est de 90 euros pour une session de 60 minutes, offrant une immersion totale dans une atmosphère palpitante. Chaque recoin et chaque indice trouvé vous rapprocheront de la sortie, mais faites vite, le temps presse!"],
+        ["Salle des Peintures et Lumieres", "Résolvez des énigmes cachées dans les tableaux illuminés pour percer leurs secrets dans la Salle des Peintures et Lumières. Plongez dans un univers artistique où chaque œuvre cache un indice crucial. Ce défi est conçu pour des groupes de 3 à 8 personnes et coûte 100 euros pour une heure. La combinaison de lumière et d'art crée une ambiance unique qui stimule l'intellect et la créativité. Préparez-vous à voir l'art sous un nouveau jour et à découvrir des mystères cachés dans chaque coup de pinceau."],
+        ["Salle de Mystere de Meurtre", "Entrez dans une scène de crime pleine de suspense dans la Salle de Mystère de Meurtre. Rassemblez des indices et démasquez le coupable avant qu'il ne soit trop tard. Cette salle peut accueillir de 2 à 5 détectives en herbe et coûte 85 euros pour une session de 60 minutes. Mettez-vous dans la peau d'un enquêteur, analysez les preuves et résolvez l'affaire. Chaque détail compte et chaque minute est précieuse pour attraper le meurtrier avant qu'il ne frappe de nouveau. Serez-vous à la hauteur du défi?"],
+        ["Salle de l'Hotel Hante", "Explorez les couloirs sombres et découvrez les secrets effrayants cachés dans chaque chambre de la Salle de l'Hôtel Hanté. Cette expérience immersive est conçue pour les amateurs de frissons et de mystères paranormaux. La salle peut accueillir de 3 à 7 personnes et coûte 95 euros pour une heure de terreur et de découverte. L'ambiance lugubre et les histoires hantées vous tiendront en haleine alors que vous essayez de dévoiler les sombres secrets de cet hôtel mystérieux. Êtes-vous prêt à affronter vos peurs?"]
+    ]);
+
+    const gameMasterNames=new Map([
+        ["Salle de la Porte Rouge", "Maxime Beaumont"],
+        ["Salle des Peintures et Lumieres","Amélie Dubois"],
+        ["Salle de Mystere de Meurtre","Nicolas Leclerc"],
+        ["Salle de l'Hotel Hante","Élise Lambert"]
+    ]);
+
+    const gameMasterDescriptions=new Map([
+        ["Salle de la Porte Rouge", "Maxime Beaumont est le maître du jeu par excellence, avec un talent pour la narration et une habileté à créer des expériences immersives. Avec son expérience dans le théâtre et sa passion pour les énigmes, Maxime donne vie à chaque escape room avec ses récits captivants et son souci du détail. Son calme et sa rapidité de réflexion en font le guide parfait à travers les rebondissements de la Salle de la Porte Rouge. Les joueurs sont attirés par sa personnalité charismatique et se trouvent pleinement plongés dans le mystère sous sa direction."],
+        ["Salle des Peintures et Lumieres","Amélie Dubois est une passionnée de casse-têtes avec un talent pour défier l'esprit de ses joueurs. En tant qu'ancienne ingénieure devenue maître du jeu, elle associe ses compétences analytiques à son amour du jeu pour créer des expériences d'escape room complexes et stimulantes. Dans la Salle des Peintures et Lumières, Amélie guide les joueurs à travers les secrets cachés des œuvres d'art illuminées avec enthousiasme et précision. Son attention aux détails garantit que chaque indice est placé avec un but, maintenant les joueurs engagés et désireux de découvrir le prochain puzzle."],
+        ["Salle de Mystere de Meurtre","Nicolas Leclerc est un maître du suspense, spécialisé dans la création d'expériences de mystère et de meurtre palpitantes. Avec une formation en criminologie et une passion pour la fiction policière, Nicolas apporte une authenticité à la Salle de Mystère de Meurtre. Son expertise en sciences légales et en analyse de scènes de crime ajoute une couche supplémentaire d'intrigue à l'enquête, maintenant les joueurs sur le bord de leur siège alors qu'ils se précipitent contre la montre pour résoudre l'affaire. Avec Nicolas à la barre, les joueurs sont assurés d'une aventure exaltante et inoubliable."],
+        ["Salle de l'Hotel Hante","Élise Lambert est une conteuse expérimentée avec un talent pour créer des expériences d'escape room atmosphériques et captivantes. Avec une formation en littérature et une fascination pour le surnaturel, Élise apporte un sens du mystère et de l'intrigue à la Salle de l'Hôtel Hanté. Ses récits imaginatifs et son attention aux détails transportent les joueurs dans un monde de fantômes et de hantises, où chaque grincement de plancher et chaque lumière vacillante contribuent à un sentiment de malaise. Sous la direction d'Élise, les joueurs doivent compter sur leur intelligence et leur bravoure pour démêler les secrets de l'hôtel hanté et s'échapper avant qu'il ne soit trop tard."]
+    ]);
+</script>
+
+</body>

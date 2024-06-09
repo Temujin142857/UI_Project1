@@ -1,0 +1,100 @@
+body{
+    background-image: url('../Images/Background1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    position: relative;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.row{
+    clear: both;
+}
+
+
+.rectangle {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    width: 600px;
+    height: 300px;
+    background: #b59a73;
+}
+
+img {
+    width: 600px;
+    height: 300px;
+    object-fit: cover; /* Or any other value */
+}
+
+.trapezoid {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    width: 150px;
+    height: 300px;
+    background: #b59a73;
+    display: flex; /* To center text within */
+    align-items: center; /* Vertically center text */
+    justify-content: center; /* Horizontally center text */
+}
+
+
+.trapezoidLeft {
+    left:0;
+    clip-path: polygon(0% 0%, 0% 100%, 100% 75%, 100% 25%);
+}
+
+.trapezoidRight {
+    clip-path: polygon(0% 25%, 0% 75%, 100% 100%, 100% 0%);
+    right:0;
+    float: right;
+}
+
+.mover {
+    display: flex;
+    position: relative;
+    width: 750px;
+    height: 300px;
+}
+
+@keyframes extendLeft {
+    0% { left: -600px; }
+    100% { left: 0; }
+}
+
+@keyframes retractLeft {
+    0% { left: 0; }
+    100% { left: -600px; }
+}
+
+.extendingLeft {
+    animation: extendLeft 0.5s linear forwards;
+}
+
+.retractingLeft{
+    animation: retractLeft 0.5s linear forwards;
+}
+
+@keyframes extendRight {
+    0% {  right: -600px }
+    100% { right: 0; }
+}
+
+@keyframes retractRight {
+    0% { right: 0; }
+    100% {  right: -600px }
+}
+
+.extendingRight {
+    animation: extendRight 0.5s linear forwards;
+}
+
+.retractingRight {
+    animation: retractRight 0.5s linear forwards;
+}
+
+

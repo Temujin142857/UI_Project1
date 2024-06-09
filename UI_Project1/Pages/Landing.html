@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../Styles/LandingStyles.css">
+    <title></title>
+</head>
+<body>
+<div Style="text-align: center; margin-top: 0; padding-top: 0; background-color: #b59a73;">
+    <h1 style="font-size: 64px; margin-bottom: 0;">Luxor Lounge</h1>
+    <ul style="list-style-type: none; display: flex; justify-content: center; padding-top: 0; padding-left: 0; margin-left:0; margin-top: 0; margin-bottom: 5px">
+        <li style="margin-right: 20px;">123 Abc Ave. Ottawa Ontario</li>
+        <li>(888) 345 7890</li>
+    </ul>
+    <ul style="list-style-type: none; display: flex; justify-content: center; padding-top: 0; padding-left: 0; margin-left:0; margin-top: 0; margin-bottom:0; padding-bottom: 0;">
+        <li style="margin-right: 10px;">Ouvert 11am-8pm</li>
+        <li>Lundi-Vendredi</li>
+    </ul>
+    <p Style="margin-top: 5px; padding-bottom: 5px">10am-10pm Samedi-Dimanche</p>
+</div>
+
+<div class="row" >
+    <div class="mover" style="left: -600px; margin-top: 50px;">
+        <div class="rectangle rectangleLeft" data-name="Salle de la Porte Rouge">
+            <img src="../Images/Room1.jpg" alt="Image">
+        </div>
+        <div class="trapezoid trapezoidLeft">
+            <p>
+                Salle de la Porte Rouge:
+                <br><br>
+                Ressentez le frisson de l'inconnu en entrant dans la Salle de la Porte Rouge. Derriere cette barriere cramoisie se cache un labyrinthe d'enigmes mysterieuses.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="mover" Style="float: right; right: -600px">
+        <div class="trapezoid trapezoidRight">
+            <p>
+                Salle des Peintures et Lumieres:
+                <br><br>
+                Resolvez des enigmes cachees dans les tableaux illumines pour percer leurs secrets.
+            </p>
+        </div>
+        <div class="rectangle rectangleRight" data-name="Salle des Peintures et Lumieres">
+            <img src="../Images/Room2.jpg" alt="Image">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="mover" Style="left: -600px">
+        <div class="rectangle rectangleLeft" data-name="Salle de Mystere de Meurtre">
+            <img src="../Images/Room3.jpg" alt="Image">
+        </div>
+        <div class="trapezoid trapezoidLeft">
+            Salle de Mystere de Meurtre:
+            <br><br>
+            Entrez dans une scene de crime pleine de suspense. Rassemblez des indices et demasquez le coupable avant qu'il ne soit trop tard.
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="mover" Style="float: right; right: -600px">
+        <div class="trapezoid trapezoidRight">
+            Salle de l'Hotel Hante:
+            <br><br>
+            Explorez les couloirs sombres et decouvrez les secrets effrayants caches dans chaque chambre.
+        </div>
+        <div class="rectangle rectangleRight" data-name="Salle de l'Hotel Hante">
+            <img src="../Images/Room4.jpg" alt="Image">
+        </div>
+    </div>
+</div>
+
+<!--
+<input type="date" id="birthdate" name="birthdate">
+-->
+</body>
+
+<script>
+    document.querySelectorAll('.trapezoidLeft').forEach(trapezoidLeft => {
+        trapezoidLeft.addEventListener('click', () => {
+            const parentDiv = trapezoidLeft.parentNode;
+            if (parentDiv.classList.contains('extendingLeft')) {
+                parentDiv.classList.remove('extendingLeft');
+                parentDiv.classList.add('retractingLeft');
+            } else if (parentDiv.classList.contains('retractingLeft')) {
+                parentDiv.classList.remove('retractingLeft');
+                parentDiv.classList.add('extendingLeft');
+            } else {
+                parentDiv.classList.add('extendingLeft');
+            }
+        });
+    });
+
+    document.querySelectorAll('.trapezoidRight').forEach(trapezoidRight => {
+        trapezoidRight.addEventListener('click', () => {
+            const parentDiv = trapezoidRight.parentNode;
+            if (parentDiv.classList.contains('extendingRight')) {
+                parentDiv.classList.remove('extendingRight');
+                parentDiv.classList.add('retractingRight');
+            } else if (parentDiv.classList.contains('retractingRight')) {
+                parentDiv.classList.remove('retractingRight');
+                parentDiv.classList.add('extendingRight');
+            } else {
+                parentDiv.classList.add('extendingRight');
+            }
+        });
+    });
+
+    document.querySelectorAll('.rectangle').forEach(rectangle => {
+        rectangle.addEventListener('click', () => {
+            const name = rectangle.getAttribute('data-name');
+            navigateWithParams(name);
+        });
+    });
+
+
+
+    function navigateWithParams(name) {
+        console.log(name);
+        const url = `Reservation.html?room=${encodeURIComponent(name)}`;
+        window.location.href = url;
+    }
+
+
+</script>
