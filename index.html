@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../Styles/LandingStyles.css">
+    <link rel="stylesheet" href="UI_Project1/Styles/LandingStyles.css">
     <title></title>
 </head>
 <body>
@@ -21,7 +21,7 @@
 <div class="row" >
     <div class="mover" style="left: -600px; margin-top: 50px;">
         <div class="rectangle rectangleLeft" data-name="Salle de la Porte Rouge">
-            <img src="../Images/Room1.jpg" alt="Image">
+            <img src="UI_Project1/Images/Room1.jpg" alt="Image">
         </div>
         <div class="trapezoid trapezoidLeft">
             <p>
@@ -43,7 +43,7 @@
             </p>
         </div>
         <div class="rectangle rectangleRight" data-name="Salle des Peintures et Lumieres">
-            <img src="../Images/Room2.jpg" alt="Image">
+            <img src="UI_Project1/Images/Room2.jpg" alt="Image">
         </div>
     </div>
 </div>
@@ -51,7 +51,7 @@
 <div class="row">
     <div class="mover" Style="left: -600px">
         <div class="rectangle rectangleLeft" data-name="Salle de Mystere de Meurtre">
-            <img src="../Images/Room3.jpg" alt="Image">
+            <img src="UI_Project1/Images/Room3.jpg" alt="Image">
         </div>
         <div class="trapezoid trapezoidLeft">
             Salle de Mystere de Meurtre:
@@ -69,7 +69,7 @@
             Explorez les couloirs sombres et decouvrez les secrets effrayants caches dans chaque chambre.
         </div>
         <div class="rectangle rectangleRight" data-name="Salle de l'Hotel Hante">
-            <img src="../Images/Room4.jpg" alt="Image">
+            <img src="UI_Project1/Images/Room4.jpg" alt="Image">
         </div>
     </div>
 </div>
@@ -121,7 +121,7 @@
 
     function navigateWithParams(name) {
         console.log(name);
-        const url = `Reservation.html?room=${encodeURIComponent(name)}`;
+        const url = `UI_Project1/Pages/Reservation.html?room=${encodeURIComponent(name)}`;
         window.location.href = url;
     }
 
