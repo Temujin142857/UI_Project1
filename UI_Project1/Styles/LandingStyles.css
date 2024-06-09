@@ -18,14 +18,10 @@ body{
     padding: 0;
     position: relative;
     cursor: pointer;
-    width: 600px;
-    height: 300px;
     background: #b59a73;
 }
 
 img {
-    width: 600px;
-    height: 300px;
     object-fit: cover; /* Or any other value */
 }
 
@@ -34,14 +30,151 @@ img {
     padding: 0;
     position: relative;
     cursor: pointer;
-    width: 150px;
-    height: 300px;
     background: #b59a73;
     display: flex; /* To center text within */
     align-items: center; /* Vertically center text */
     justify-content: center; /* Horizontally center text */
 }
 
+/* Media query for larger screens */
+@media (min-width: 1450px) {
+    .rectangle, .rectangle img {
+        width: 1000px;
+        height: 500px;
+    }
+
+    .trapezoid {
+        width: 250px;
+        height: 500px;
+        padding: 5px
+    }
+
+    .mover {
+        width: 1250px;
+        height: 500px;
+    }
+
+    .moverLeft{
+        left: -1000px;
+    }
+
+    .moverRight{
+        right: -1000px;
+    }
+
+    @keyframes extendLeft {
+        0% { left: -1000px; }
+        100% { left: 0; }
+    }
+
+    @keyframes retractLeft {
+        0% { left: 0; }
+        100% { left: -1000px; }
+    }
+
+    @keyframes extendRight {
+        0% { right: -1000px; }
+        100% { right: 0; }
+    }
+
+    @keyframes retractRight {
+        0% { right: 0; }
+        100% { right: -1000px; }
+    }
+}
+
+/* Media query for medium screens */
+@media (min-width: 1250px) and (max-width: 1449px) {
+    .rectangle, .rectangle img {
+        width: 800px;
+        height: 400px;
+    }
+
+    .trapezoid {
+        width: 200px;
+        height: 400px;
+        padding: 5px
+    }
+
+    .mover {
+        width: 1000px;
+        height: 400px;
+    }
+
+    .moverLeft{
+        left: -800px;
+    }
+
+    .moverRight{
+        right: -800px;
+    }
+
+    @keyframes extendLeft {
+        0% { left: -800px; }
+        100% { left: 0; }
+    }
+
+    @keyframes retractLeft {
+        0% { left: 0; }
+        100% { left: -800px; }
+    }
+
+    @keyframes extendRight {
+        0% { right: -800px; }
+        100% { right: 0; }
+    }
+
+    @keyframes retractRight {
+        0% { right: 0; }
+        100% { right: -800px; }
+    }
+}
+
+/* Media query for small screens */
+@media (max-width: 1249px) {
+    .rectangle, .rectangle img {
+        width: 600px;
+        height: 300px;
+    }
+
+    .trapezoid {
+        width: 150px;
+        height: 300px;
+    }
+
+    .mover {
+        width: 750px;
+        height: 300px;
+    }
+
+    .moverLeft{
+        left: -600px;
+    }
+
+    .moverRight{
+        right: -600px;
+    }
+
+    @keyframes extendLeft {
+        0% { left: -600px; }
+        100% { left: 0; }
+    }
+
+    @keyframes retractLeft {
+        0% { left: 0; }
+        100% { left: -600px; }
+    }
+
+    @keyframes extendRight {
+        0% { right: -600px; }
+        100% { right: 0; }
+    }
+
+    @keyframes retractRight {
+        0% { right: 0; }
+        100% { right: -600px; }
+    }
+}
 
 .trapezoidLeft {
     left:0;
@@ -57,19 +190,8 @@ img {
 .mover {
     display: flex;
     position: relative;
-    width: 750px;
-    height: 300px;
 }
 
-@keyframes extendLeft {
-    0% { left: -600px; }
-    100% { left: 0; }
-}
-
-@keyframes retractLeft {
-    0% { left: 0; }
-    100% { left: -600px; }
-}
 
 .extendingLeft {
     animation: extendLeft 0.5s linear forwards;
@@ -77,16 +199,6 @@ img {
 
 .retractingLeft{
     animation: retractLeft 0.5s linear forwards;
-}
-
-@keyframes extendRight {
-    0% {  right: -600px }
-    100% { right: 0; }
-}
-
-@keyframes retractRight {
-    0% { right: 0; }
-    100% {  right: -600px }
 }
 
 .extendingRight {
